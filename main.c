@@ -3,6 +3,7 @@
 #include "HAL_PMM.h"
 #include "HAL_UCS.h"
 #include "HAL_AppUart.h"
+#include "printf.h"
 
 /**
  * 配置开发板，使其处于正常工作模式
@@ -38,6 +39,9 @@ int main(void)
 	while(1) {
 		uint8_t data = AppUart_getChar();
 		AppUart_putChar(data);
+		unsigned char i = 10;
+		while(i--);
+		printf("Hello, World!\r\n");
 	}
 
 	return 0;

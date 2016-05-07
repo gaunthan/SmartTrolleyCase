@@ -3,31 +3,22 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
-CMD_SRCS += \
-../lnk_msp430f5529.cmd 
-
 C_SRCS += \
-../main.c \
-../printf.c 
+../Drivers/GPS/UBLOX_6M.c 
 
 OBJS += \
-./main.obj \
-./printf.obj 
+./Drivers/GPS/UBLOX_6M.obj 
 
 C_DEPS += \
-./main.pp \
-./printf.pp 
+./Drivers/GPS/UBLOX_6M.pp 
 
 C_DEPS__QUOTED += \
-"main.pp" \
-"printf.pp" 
+"Drivers\GPS\UBLOX_6M.pp" 
 
 OBJS__QUOTED += \
-"main.obj" \
-"printf.obj" 
+"Drivers\GPS\UBLOX_6M.obj" 
 
 C_SRCS__QUOTED += \
-"../main.c" \
-"../printf.c" 
+"../Drivers/GPS/UBLOX_6M.c" 
 
 

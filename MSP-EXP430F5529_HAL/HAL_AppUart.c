@@ -70,7 +70,6 @@ void AppUart_init(void)
  * @param   None
  * @return  received character
  ******************************************************************************/
-
 uint8_t AppUart_getChar(void)
 {
     uint8_t receiveChar;
