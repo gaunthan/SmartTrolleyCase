@@ -105,6 +105,5 @@ SUBDIRS := \
 . \
 MSP-EXP430F5529_HAL \
 F5xx_F6xx_Core_Lib \
-Drivers/nmea_decode/src \
 Drivers/GPS \
 

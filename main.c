@@ -10,6 +10,38 @@
 /**
  * 配置开发板，使其处于正常工作模式
  */
+void SystemInit(void);
+
+
+/*
+ * main.c
+ */
+int main(void)
+{
+	NMEA_msg msg;
+
+	SystemInit();
+	GPS_Init();
+	Board_ledOff(LED1);
+	Board_ledOff(LED2);
+
+	while(1) {
+		if(OK == GPS_GetPosition(&msg)) {
+			Board_ledToggle(LED1);
+			GPS_ShowPosition(&msg);
+		}
+
+		Board_ledToggle(LED2);
+	}
+
+	return 0;
+}
+
+
+
+/**
+ * 配置开发板，使其处于正常工作模式
+ */
 void SystemInit(void)
 {
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
@@ -29,26 +61,3 @@ void SystemInit(void)
     __enable_interrupt();                        //使能全局中断
 }
 
-/*
- * main.c
- */
-int main(void)
-{
-	GeoPos pos;
-
-
-	SystemInit();
-	GPS_Init();
-	Board_ledOff(LED1);
-	Board_ledOff(LED2);
-
-	while(1) {
-		if(OK == GPS_GetPosition(&pos)) {
-			Board_ledToggle(LED1);
-		}
-
-		Board_ledToggle(LED2);
-	}
-
-	return 0;
-}

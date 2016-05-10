@@ -37,14 +37,19 @@
  */
 #define GPS_RBUFF_SIZE 512
 
+
+/**
+ * 正常情况下，GPGLL命令的长度为50
+ */
+#define NMEA_GPGLL_LENGTH 50
+
 /**************************************************************
 *        Include File Section
 **************************************************************/
 #include "HAL_AppUart.h"
-#include "nmea/nmea.h"
 #include "general.h"
 #include <stdlib.h>
-
+#include <string.h>
 
 /**************************************************************
 *        Macro Define Section
@@ -63,13 +68,19 @@
 /**************************************************************
 *        Struct Define Section
 **************************************************************/
+
+
+
 /**
- * 地理位置结构定义，成员有经度和纬度。
+ * NMEA协议解析后的字段，只包含一些本项目需要的字段。
  */
-typedef struct geoPos {
-	double lat;		/* 经度 */
-	double lon;		/* 纬度 */
-}GeoPos;
+typedef struct {
+	double longitude;	//经度，格式为：dddmm.mmmmm
+	double latitude;	//纬度，格式为：ddmm.mmmmm
+	unsigned long utc;	//UTC时间，格式为：hhmmss
+	char status;		//定位状态，A=有效定位，V=无效定位
+}NMEA_msg;
+
 
 /**************************************************************
 *        Prototype Declare Section
@@ -82,9 +93,15 @@ void GPS_Init(void);
 
 
 /**
- * 从GPS模块获得经度和纬度信息，其将保存在结构GeoPos中。
+ * 从GPS模块获得经度和纬度信息，其将保存在结构中。
  */
-Status GPS_GetPosition(GeoPos *pos);
+Status GPS_GetPosition(NMEA_msg *msg);
+
+
+/**
+ * 供调试使用，打印msg各成员。
+ */
+void GPS_ShowPosition(NMEA_msg *msg);
 
 
 /**************************************************************
