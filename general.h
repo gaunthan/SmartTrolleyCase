@@ -1,36 +1,30 @@
 /***************************************************************************************
-*        File Name              :	UBLOX_6M.H
+*        File Name              :	general.h
 *        CopyRight              :	gaunthan
-*        ModuleName             :	GPS
+*        ModuleName             :
 *
-*        CPU                    :   MSP430
-*        RTOS                   :   None
+*        CPU                    :
+*        RTOS                   :
 *
-*        Create Data            :	2016/5/7
-*        Author/Corportation    :	Gaunthan
+*        Create Data            :	2016/5/9
+*        Author/Corportation    :	gaunthan
 *
-*        Abstract Description   :	封装UBLOX-6M GPS模块，提供地理参数获取接口。
+*        Abstract Description   :	通用类型定义与接口
 *
 *--------------------------------Revision History--------------------------------------
 *       No      version     Date        Revised By      Item        Description
-*       1       v1.0        2016/5/7	Gaunthan        		 	Create this file
-*
+*       1       v1.0        2016/5/9	gaunthan        		 	Create this file
 ***************************************************************************************/
 
 /**************************************************************
 *        Multi-Include-Prevent Section
 **************************************************************/
-#ifndef UBLOX_6M_H
-#define UBLOX_6M_H
+#ifndef GENERAL_H
+#define GENERAL_H
 
 /**************************************************************
 *        Debug switch Section
 **************************************************************/
-
-/**
- * GPS模块调试开关宏。1代表开启调试信息，0代表不开启。
- */
-#define UBLOX_6M_DEBUG 1
 
 
 /**************************************************************
@@ -42,19 +36,27 @@
 *        Macro Define Section
 **************************************************************/
 
-/**
- * @brief	调试信息输出宏定义
- */
-#if UBLOX_6M_DEBUG
-	#define GPS_DEBUG(fmt,args...) printf(fmt ,##args)
-#else
-	#define GPS_DEBUG(fmt,args...)
-#endif
 
 /**************************************************************
 *        Struct Define Section
 **************************************************************/
 
+/**
+ * 函数返回状态定义
+ */
+typedef enum {
+	ERROR,
+	OK,
+	FALSE,
+	TRUE,
+}Status;
+
+
+/**
+ * 常用数据类型定义
+ */
+typedef unsigned char u8;
+typedef unsigned int u32;
 
 /**************************************************************
 *        Prototype Declare Section

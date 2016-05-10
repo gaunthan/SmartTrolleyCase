@@ -4,21 +4,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Drivers/GPS/UBLOX_6M.c 
+../Drivers/GPS/GPS.c 
 
 OBJS += \
-./Drivers/GPS/UBLOX_6M.obj 
+./Drivers/GPS/GPS.obj 
 
 C_DEPS += \
-./Drivers/GPS/UBLOX_6M.pp 
+./Drivers/GPS/GPS.pp 
 
 C_DEPS__QUOTED += \
-"Drivers\GPS\UBLOX_6M.pp" 
+"Drivers\GPS\GPS.pp" 
 
 OBJS__QUOTED += \
-"Drivers\GPS\UBLOX_6M.obj" 
+"Drivers\GPS\GPS.obj" 
 
 C_SRCS__QUOTED += \
-"../Drivers/GPS/UBLOX_6M.c" 
+"../Drivers/GPS/GPS.c" 
 
 

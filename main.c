@@ -3,7 +3,9 @@
 #include "HAL_PMM.h"
 #include "HAL_UCS.h"
 #include "HAL_AppUart.h"
-#include "printf.h"
+#include <stdio.h>
+#include "GPS.h"
+#include "HAL_Board.h"
 
 /**
  * 配置开发板，使其处于正常工作模式
@@ -27,21 +29,25 @@ void SystemInit(void)
     __enable_interrupt();                        //使能全局中断
 }
 
-
 /*
  * main.c
  */
 int main(void)
 {
+	GeoPos pos;
+
+
 	SystemInit();
-	AppUart_init();
+	GPS_Init();
+	Board_ledOff(LED1);
+	Board_ledOff(LED2);
 
 	while(1) {
-		uint8_t data = AppUart_getChar();
-		AppUart_putChar(data);
-		unsigned char i = 10;
-		while(i--);
-		printf("Hello, World!\r\n");
+		if(OK == GPS_GetPosition(&pos)) {
+			Board_ledToggle(LED1);
+		}
+
+		Board_ledToggle(LED2);
 	}
 
 	return 0;

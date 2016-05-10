@@ -9,7 +9,6 @@ CG_TOOL_ROOT := D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3
 ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
 "./main.obj" \
-"./printf.obj" \
 "./MSP-EXP430F5529_HAL/HAL_AppUart.obj" \
 "./MSP-EXP430F5529_HAL/HAL_Board.obj" \
 "./MSP-EXP430F5529_HAL/HAL_Buttons.obj" \
@@ -23,7 +22,17 @@ $(GEN_CMDS__FLAG) \
 "./F5xx_F6xx_Core_Lib/HAL_PMM.obj" \
 "./F5xx_F6xx_Core_Lib/HAL_TLV.obj" \
 "./F5xx_F6xx_Core_Lib/HAL_UCS.obj" \
-"./Drivers/GPS/UBLOX_6M.obj" \
+"./Drivers/nmea_decode/src/context.obj" \
+"./Drivers/nmea_decode/src/generate.obj" \
+"./Drivers/nmea_decode/src/generator.obj" \
+"./Drivers/nmea_decode/src/gmath.obj" \
+"./Drivers/nmea_decode/src/info.obj" \
+"./Drivers/nmea_decode/src/parse.obj" \
+"./Drivers/nmea_decode/src/parser.obj" \
+"./Drivers/nmea_decode/src/sentence.obj" \
+"./Drivers/nmea_decode/src/time.obj" \
+"./Drivers/nmea_decode/src/tok.obj" \
+"./Drivers/GPS/GPS.obj" \
 "../lnk_msp430f5529.cmd" \
 -l"libc.a" \
 -l"libmath.a" \
@@ -38,10 +47,12 @@ RMDIR := RMDIR /S/Q
 -include subdir_vars.mk
 -include MSP-EXP430F5529_HAL/subdir_vars.mk
 -include F5xx_F6xx_Core_Lib/subdir_vars.mk
+-include Drivers/nmea_decode/src/subdir_vars.mk
 -include Drivers/GPS/subdir_vars.mk
 -include subdir_rules.mk
 -include MSP-EXP430F5529_HAL/subdir_rules.mk
 -include F5xx_F6xx_Core_Lib/subdir_rules.mk
+-include Drivers/nmea_decode/src/subdir_rules.mk
 -include Drivers/GPS/subdir_rules.mk
 -include objects.mk
 
@@ -162,8 +173,8 @@ SmartTrolleyCase.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "main.pp" "printf.pp" "MSP-EXP430F5529_HAL\HAL_AppUart.pp" "MSP-EXP430F5529_HAL\HAL_Board.pp" "MSP-EXP430F5529_HAL\HAL_Buttons.pp" "MSP-EXP430F5529_HAL\HAL_Cma3000.pp" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.pp" "MSP-EXP430F5529_HAL\HAL_Menu.pp" "MSP-EXP430F5529_HAL\HAL_SDCard.pp" "MSP-EXP430F5529_HAL\HAL_Wheel.pp" "F5xx_F6xx_Core_Lib\HAL_FLASH.pp" "F5xx_F6xx_Core_Lib\HAL_PMAP.pp" "F5xx_F6xx_Core_Lib\HAL_PMM.pp" "F5xx_F6xx_Core_Lib\HAL_TLV.pp" "F5xx_F6xx_Core_Lib\HAL_UCS.pp" "Drivers\GPS\UBLOX_6M.pp" 
-	-$(RM) "main.obj" "printf.obj" "MSP-EXP430F5529_HAL\HAL_AppUart.obj" "MSP-EXP430F5529_HAL\HAL_Board.obj" "MSP-EXP430F5529_HAL\HAL_Buttons.obj" "MSP-EXP430F5529_HAL\HAL_Cma3000.obj" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.obj" "MSP-EXP430F5529_HAL\HAL_Menu.obj" "MSP-EXP430F5529_HAL\HAL_SDCard.obj" "MSP-EXP430F5529_HAL\HAL_Wheel.obj" "F5xx_F6xx_Core_Lib\HAL_FLASH.obj" "F5xx_F6xx_Core_Lib\HAL_PMAP.obj" "F5xx_F6xx_Core_Lib\HAL_PMM.obj" "F5xx_F6xx_Core_Lib\HAL_TLV.obj" "F5xx_F6xx_Core_Lib\HAL_UCS.obj" "Drivers\GPS\UBLOX_6M.obj" 
+	-$(RM) "main.pp" "MSP-EXP430F5529_HAL\HAL_AppUart.pp" "MSP-EXP430F5529_HAL\HAL_Board.pp" "MSP-EXP430F5529_HAL\HAL_Buttons.pp" "MSP-EXP430F5529_HAL\HAL_Cma3000.pp" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.pp" "MSP-EXP430F5529_HAL\HAL_Menu.pp" "MSP-EXP430F5529_HAL\HAL_SDCard.pp" "MSP-EXP430F5529_HAL\HAL_Wheel.pp" "F5xx_F6xx_Core_Lib\HAL_FLASH.pp" "F5xx_F6xx_Core_Lib\HAL_PMAP.pp" "F5xx_F6xx_Core_Lib\HAL_PMM.pp" "F5xx_F6xx_Core_Lib\HAL_TLV.pp" "F5xx_F6xx_Core_Lib\HAL_UCS.pp" "Drivers\nmea_decode\src\context.pp" "Drivers\nmea_decode\src\generate.pp" "Drivers\nmea_decode\src\generator.pp" "Drivers\nmea_decode\src\gmath.pp" "Drivers\nmea_decode\src\info.pp" "Drivers\nmea_decode\src\parse.pp" "Drivers\nmea_decode\src\parser.pp" "Drivers\nmea_decode\src\sentence.pp" "Drivers\nmea_decode\src\time.pp" "Drivers\nmea_decode\src\tok.pp" "Drivers\GPS\GPS.pp" 
+	-$(RM) "main.obj" "MSP-EXP430F5529_HAL\HAL_AppUart.obj" "MSP-EXP430F5529_HAL\HAL_Board.obj" "MSP-EXP430F5529_HAL\HAL_Buttons.obj" "MSP-EXP430F5529_HAL\HAL_Cma3000.obj" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.obj" "MSP-EXP430F5529_HAL\HAL_Menu.obj" "MSP-EXP430F5529_HAL\HAL_SDCard.obj" "MSP-EXP430F5529_HAL\HAL_Wheel.obj" "F5xx_F6xx_Core_Lib\HAL_FLASH.obj" "F5xx_F6xx_Core_Lib\HAL_PMAP.obj" "F5xx_F6xx_Core_Lib\HAL_PMM.obj" "F5xx_F6xx_Core_Lib\HAL_TLV.obj" "F5xx_F6xx_Core_Lib\HAL_UCS.obj" "Drivers\nmea_decode\src\context.obj" "Drivers\nmea_decode\src\generate.obj" "Drivers\nmea_decode\src\generator.obj" "Drivers\nmea_decode\src\gmath.obj" "Drivers\nmea_decode\src\info.obj" "Drivers\nmea_decode\src\parse.obj" "Drivers\nmea_decode\src\parser.obj" "Drivers\nmea_decode\src\sentence.obj" "Drivers\nmea_decode\src\time.obj" "Drivers\nmea_decode\src\tok.obj" "Drivers\GPS\GPS.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
