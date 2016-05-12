@@ -245,10 +245,9 @@ int ftoa(char *str, float num, int n)        //nÊÇ×ª»»µÄ¾«¶È£¬¼´ÊÇ×Ö·û´®'.'ºóÓÐ¼
 
     }while(!(sumF > -0.000001 && sumF < 0.000001));
 
-    *str = '/0';
+    *str = '\0';
 
     return 0;
-
 }
 
 
