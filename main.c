@@ -5,6 +5,7 @@
 #include "HAL_AppUart.h"
 #include <stdio.h>
 #include "GPS.h"
+#include "GPRS.h"
 #include "HAL_Board.h"
 
 /**
@@ -18,20 +19,14 @@ void SystemInit(void);
  */
 int main(void)
 {
-	NMEA_msg msg;
-
 	SystemInit();
-	GPS_Init();
-	Board_ledOff(LED1);
-	Board_ledOff(LED2);
+	GPRS_Init();
 
 	while(1) {
-		if(OK == GPS_GetPosition(&msg)) {
+		if(OK == GPRS_InitTCPEnv())
 			Board_ledToggle(LED1);
-			GPS_ShowPosition(&msg);
-		}
-
-		Board_ledToggle(LED2);
+		else
+			Board_ledToggle(LED2);
 	}
 
 	return 0;

@@ -88,8 +88,8 @@ uint8_t AppUart_getChar(void)
 
 void AppUart_putChar(uint8_t transmitChar)
 {
-    while (!(UCA1IFG & UCTXIFG)) ;
     UCA1TXBUF = transmitChar;
+    while (!(UCA1IFG & UCTXIFG));
 }
 
 

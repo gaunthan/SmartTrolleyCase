@@ -1,13 +1,27 @@
 #include "GPS.h"
 
 /**
- * Êı¾İ»º³åÇø£¬ÓÃÓÚ»º´æ´ÓGPSÄ£¿é½ÓÊÕµ½µÄÊı¾İ¡£
+ * @brief	µ÷ÊÔĞÅÏ¢Êä³öºê¶¨Òå
  */
-char GPS_Buf[GPS_RBUFF_SIZE + 1] = {0};
+#if GPS_DEBUG_ON
+	#include <stdio.h>
+	#define GPS_DEBUG(str) printf(str)
+#else
+	#define GPS_DEBUG(str)
+#endif
+
 
 
 /**
- * ´ÓGPSÄ£¿é¶ÁÈ¡Ò»¸ö×Ö½Ú
+ * @brief	Êı¾İ»º³åÇø£¬ÓÃÓÚ»º´æ´ÓGPSÄ£¿é½ÓÊÕµ½µÄÊı¾İ¡£
+ */
+static char GPS_Buf[GPS_BUFF_SIZE + 1] = {0};
+
+
+/**
+ * @brief	´ÓGPSÄ£¿é¶ÁÈ¡Ò»¸öÎŞ·ûºÅ×Ö·û
+ * @param	None
+ * @return	Ò»¸öÎŞ·ûºÅ×Ö·û
  */
 static inline unsigned char GPS_GetByte(void)
 {
@@ -16,7 +30,9 @@ static inline unsigned char GPS_GetByte(void)
 
 
 /**
- * ÏòGPSÄ£¿é·¢ËÍÒ»¸ö×Ö½Ú
+ * @brief	ÏòGPSÄ£¿é·¢ËÍÒ»¸öÎŞ·ûºÅ×Ö·û
+ * @param	b ĞèÒª·¢ËÍµÄ×Ö·û
+ * @return	None
  */
 static inline void GPS_SendByte(unsigned char b)
 {
@@ -25,7 +41,9 @@ static inline void GPS_SendByte(unsigned char b)
 
 
 /**
- * ³õÊ¼»¯GPSÄ£¿éÓëÏà¹ØÒı½Å¡£
+ * @brief	³õÊ¼»¯GPSÄ£¿éÓëÏà¹ØÒı½Å¡£
+ * @param	None
+ * @return	None
  */
 void GPS_Init(void)
 {
@@ -34,7 +52,11 @@ void GPS_Init(void)
 
 
 /**
- * ´ÓGPSÄ£¿é»ñµÃsize×Ö½ÚµÄµØÀíÎ»ÖÃÔ­Ê¼ĞÅÏ¢£¬½«Æä´æ´¢ÔÚbufÖĞ¡£
+ * @brief	´ÓGPSÄ£¿é»ñµÃsize×Ö½ÚµÄµØÀíÎ»ÖÃÔ­Ê¼ĞÅÏ¢£¬½«Æä´æ´¢ÔÚbufÖĞ¡£
+ * @param	buf »º³åÇøµØÖ·
+ * 			size »º³åÇø´óĞ¡
+ * @return	OK ³É¹¦»ñÈ¡Êı¾İ
+ * 			ERROR »ñÈ¡Ê§°Ü
  */
 static Status GPS_GetData(char *buf, int size)
 {
@@ -54,7 +76,7 @@ static Status GPS_GetData(char *buf, int size)
 
 
 /**
- * »ñÈ¡×Ôbuf´¦¿ªÊ¼µÚcx¸ö¶ººÅµÄÎ»ÖÃ¡£
+ * @brief	»ñÈ¡×Ôbuf´¦¿ªÊ¼µÚcx¸ö¶ººÅµÄÎ»ÖÃ¡£
  */
 static char *NMEA_GetCommaPos(char *buf, int cx)
 {
@@ -76,7 +98,12 @@ static char *NMEA_GetCommaPos(char *buf, int cx)
 
 
 /**
- * ½âÂëÖ¸¶¨»º³åÇøÖĞµÄGPGLLÃüÁî£¬½á¹û½«´æÔÚmsgÖĞ¡£
+ * @brief	½âÂëÖ¸¶¨»º³åÇøÖĞµÄGPGLLÃüÁî£¬½á¹û½«´æÔÚmsgÖĞ¡£
+ * @param	buf ĞèÒª½âÂëµÄ»º³åÇøµØÖ·
+ * 			size »º³åÇø´óĞ¡
+ * 			msg ½á¹¹ÌåÖ¸Õë£¬Ö¸Ïò½«´æ·Å½âÂëºóµÄĞÅÏ¢µÄ½á¹¹Ìå
+ * @return	OK ½âÂë³É¹¦
+ * 			ERROR ½âÂëÊ§°Ü
  */
 static Status NMEA_DecodeGPGLL(const char *buf, int size, NMEA_msg *msg)
 {
@@ -131,13 +158,13 @@ Status GPS_GetPosition(NMEA_msg *msg)
 	}
 
 	//»ñÈ¡GPSÔ­Ê¼Êı¾İ
-	if(ERROR == GPS_GetData(GPS_Buf, GPS_RBUFF_SIZE)) {
+	if(ERROR == GPS_GetData(GPS_Buf, GPS_BUFF_SIZE)) {
 		GPS_DEBUG("GPS: Error in GPS_GetData().\r\n");
 		return ERROR;
 	}
 
 	//½âÂëµØÀíĞÅÏ¢
-	return NMEA_DecodeGPGLL(GPS_Buf, GPS_RBUFF_SIZE, msg);
+	return NMEA_DecodeGPGLL(GPS_Buf, GPS_BUFF_SIZE, msg);
 }
 
 
@@ -179,7 +206,15 @@ static char *numToStr(char *buf, int n)
 
 
 
-int ftoa(char *str, float num, int n)        //nÊÇ×ª»»µÄ¾«¶È£¬¼´ÊÇ×Ö·û´®'.'ºóÓĞ¼¸Î»Ğ¡Êı
+/**
+ * @brief	½«Ò»¸ö¸¡µãÊı×ª»»Îª×Ö·û´®¡£
+ * @param	str Êä³ö»º³åÇø
+ * 			num ĞèÒª±»×ª»»µÄÊı
+ * 			n ×ª»»¾«¶È
+ * @return	0 ×ª»»³É¹¦
+ * 			-1 ×ª»»Ê§°Ü
+ */
+static int ftoa(char *str, float num, int n)        //nÊÇ×ª»»µÄ¾«¶È£¬¼´ÊÇ×Ö·û´®'.'ºóÓĞ¼¸Î»Ğ¡Êı
 {
     int     sumI;
     float   sumF;
@@ -190,7 +225,8 @@ int ftoa(char *str, float num, int n)        //nÊÇ×ª»»µÄ¾«¶È£¬¼´ÊÇ×Ö·û´®'.'ºóÓĞ¼
     char *p;
     char *pp;
 
-    if(str == NULL) return -1;
+    if(str == NULL)
+    	return -1;
     p = str;
 
     /*Is less than 0*/
@@ -252,7 +288,9 @@ int ftoa(char *str, float num, int n)        //nÊÇ×ª»»µÄ¾«¶È£¬¼´ÊÇ×Ö·û´®'.'ºóÓĞ¼
 
 
 /**
- * ¹©µ÷ÊÔÊ¹ÓÃ£¬´òÓ¡msg¸÷³ÉÔ±¡£
+ * @brief	¹©µ÷ÊÔÊ¹ÓÃ£¬´òÓ¡msg¸÷³ÉÔ±¡£
+ * @param	msg ½âÂëĞÅÏ¢½á¹¹ÌåÖ¸Õë
+ * @return	None
  */
 void GPS_ShowPosition(NMEA_msg *msg)
 {
