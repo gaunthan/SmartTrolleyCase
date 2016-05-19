@@ -19,14 +19,23 @@ void SystemInit(void);
  */
 int main(void)
 {
+	char buf[128];
+	int sentCnt = 0;
+
 	SystemInit();
 	GPRS_Init();
 
 	while(1) {
-		if(OK == GPRS_InitTCPEnv())
-			Board_ledToggle(LED1);
-		else
-			Board_ledToggle(LED2);
+		if(OK == GPRS_InitTCPEnv()) { /* 初始化TCP环境成功 */
+			if(OK == GPRS_InitSMTP()) {
+				GPRS_GetDevCode(buf, 32);
+				strcat(buf, "\r\nLocation:113,23");
+
+				while(OK == GPRS_SendMail(buf)) {}	/* 持续发邮件直到发送失败 */
+
+				GPRS_RebootDev();	/* 发送失败，重启设备 */
+			}
+		}
 	}
 
 	return 0;
