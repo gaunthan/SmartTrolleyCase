@@ -1,5 +1,5 @@
 /***************************************************************************************
-*        File Name              :	GPRS_H
+*        File Name              :	GPRS.h
 *        CopyRight              :	gaunthan
 *        ModuleName             :	GPRS
 *
@@ -30,7 +30,7 @@
 /**
  * GPRS模块调试开关宏。1代表开启调试信息，0代表不开启。
  */
-#define GPRS_DEBUG_ON 1
+#define GPRS_DEBUG_ON 0
 
 
 /**************************************************************
@@ -40,6 +40,7 @@
 #include "general.h"
 #include <stdlib.h>
 #include <string.h>
+#include "GM8125.h"
 
 /**************************************************************
 *        Macro Define Section
@@ -60,10 +61,9 @@
 /**
  * @brief	初始化GPS模块与相关引脚。
  * @param	None
- * @return	OK 初始化成功
-			ERROR 初始化失败
+ * @return	None
  */
-Status GPRS_Init(void);
+void GPRS_InitPort(void);
 
 
 /**

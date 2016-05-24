@@ -1,4 +1,4 @@
-#include <GPRS.h>
+#include "GPRS.h"
 
 /**
  * @brief	调试信息输出宏定义
@@ -151,15 +151,22 @@ static Status GPRS_WaitCREG(void)
 /**
  * @brief	初始化GPS模块与相关引脚。
  * @param	None
- * @return	OK 初始化成功
- *			ERROR 初始化失败
+ * @return	None
  */
-Status GPRS_Init(void)
+void GPRS_InitPort(void)
 {
 	AppUart_init();		/* 初始化硬件通信接口 */
+}
 
-	GPRS_SendATCmd("ATE0&W");							/* 关闭命令回显 */
-	GPRS_SendATCmd("AT+CREG=0");
+
+/**
+ * @brief	等待GPRS模块注册网络
+ * @param	None
+ * @return	OK 注册成功
+ *			ERROR 注册失败
+ */
+Status GPRS_WaitRegister(void)
+{
 	if(ERROR == GPRS_WaitCREG()) {
 		GPRS_DEBUG("ERROR: +WaitCREG\r\n");
 		return ERROR;
@@ -243,7 +250,8 @@ static Status GPRS_SendATData(char *data)
 Status GPRS_InitSMTP(void)
 {
 	char buf[128];
-
+	char username[32] = "=";
+	char userpasswd[32] = "=";
 
 	/* 建立TCP连接，服务器为smtp.163.com，端口为25 */
 	GPRS_SendATCmd("AT+CIPSTART=\"TCP\",\"smtp.163.com\",\"25\"");
@@ -279,13 +287,13 @@ Status GPRS_InitSMTP(void)
 		return ERROR;
 
 	/* 发送用户名 */
-	GPRS_SendATData("=");
+	GPRS_SendATData(username);
 	GPRS_Gets(buf, 32);
 	if(NULL == strstr(buf, "334"))		/* 查找响应中是否有"334"字样 */
 		return ERROR;
 
 	/* 发送用户密码 */
-	GPRS_SendATData("=");
+	GPRS_SendATData(userpasswd);
 	GPRS_Gets(buf, 32);
 	if(NULL == strstr(buf, "235"))		/* 查找响应中是否有"235"字样。有则代表验证成功 */
 		return ERROR;
@@ -307,13 +315,13 @@ Status GPRS_SendMail(char *msg)
 	char endFlag[16] = "\r\n.\r\n";
 
 	/* 指定邮件发件人 */
-	GPRS_SendATData("MAIL FROM: <@163.com>");
+	GPRS_SendATData("MAIL FROM: <SmartTrollyCase@163.com>");
 	GPRS_Gets(buf, 64);
 	if(NULL == strstr(buf, "250 Mail OK"))		/* 查找响应中是否有"250 Mail OK"字样 */
 		return ERROR;
 
 	/* 指定邮件接收人 */
-	GPRS_SendATData("RCPT TO: <@163.com>");
+	GPRS_SendATData("RCPT TO: <SmartTrollyCase@163.com>");
 	GPRS_Gets(buf, 64);
 	if(NULL == strstr(buf, "250 Mail OK"))		/* 查找响应中是否有"250 Mail OK"字样 */
 		return ERROR;

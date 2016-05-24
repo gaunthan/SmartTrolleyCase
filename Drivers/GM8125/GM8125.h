@@ -1,81 +1,95 @@
 /***************************************************************************************
-*        File Name              :	general.h
+*        File Name              :	GM8125.h
 *        CopyRight              :	gaunthan
-*        ModuleName             :
+*        ModuleName             :	UART MUX
 *
-*        CPU                    :
-*        RTOS                   :
+*        CPU                    :   MSP430
+*        RTOS                   :   None
 *
-*        Create Data            :	2016/5/9
+*        Create Data            :	2016/5/19
 *        Author/Corportation    :	gaunthan
 *
-*        Abstract Description   :	通用类型定义与接口
+*        Abstract Description   :	封装GM8125模块单通道模式下的控制操作，提供选择串口子通道函数。
 *
 *--------------------------------Revision History--------------------------------------
 *       No      version     Date        Revised By      Item        Description
-*       1       v1.0        2016/5/9	gaunthan        		 	Create this file
+*       1       v1.0        2016/5/19	gaunthan        		 	Create this file
+*
 ***************************************************************************************/
 
 /**************************************************************
 *        Multi-Include-Prevent Section
 **************************************************************/
-#ifndef GENERAL_H
-#define GENERAL_H
+#ifndef GM8125_H
+#define GM8125_H
 
 /**************************************************************
 *        Debug switch Section
 **************************************************************/
+/**
+ * 模块调试开关宏。1代表开启调试信息，0代表不开启。
+ */
+#define GM8125_DEBUG_ON 1
 
 
 /**************************************************************
 *        Include File Section
 **************************************************************/
-#include <stdlib.h>
+#include "HAL_AppUart.h"
+#include "general.h"
+#include "msp430f5529.h"
 
 /**************************************************************
 *        Macro Define Section
 **************************************************************/
+
+/* 定义输入通道地址引脚 */
+#define STADD2 0
+#define STADD1 BIT1
+#define STADD0 BIT0
+
+/* 定义输出通道地址引脚 */
+#define SRADD2 0
+#define SRADD1 BIT4
+#define SRADD0 BIT3
+
 
 
 /**************************************************************
 *        Struct Define Section
 **************************************************************/
 
+
 /**
- * 函数返回状态定义
+ * @brief	定义子通道标识符。
  */
 typedef enum {
-	ERROR,
-	OK,
-	FALSE,
-	TRUE,
-}Status;
+	GM_CHANNEL1,
+	GM_CHANNEL2,
+	GM_CHANNEL3,
+	GM_CHANNEL4,
+	GM_CHANNEL5,
+}GM_Channel;
 
-
-/**
- * 常用数据类型定义
- */
-typedef unsigned char u8;
-typedef unsigned int u32;
 
 /**************************************************************
 *        Prototype Declare Section
 **************************************************************/
+
 /**
- * 将整型n转换为字符串，结果存储在buf中。函数返回buf。
+ * @brief	初始化GM8125模块硬件连接
+ * @param	None
+ * @return	None
  */
-char *numToStr(char *buf, int n);
+void GM_InitPort(void);
 
 
 /**
- * @brief	将一个浮点数转换为字符串。
- * @param	str 输出缓冲区
- * 			num 需要被转换的数
- * 			n 转换精度
- * @return	0 转换成功
- * 			-1 转换失败
+ * @brief	选择与母通道通信的子通道
+ * @param	channel 通道值，可选为1~5
+ * @return	None
  */
-int ftoa(char *str, float num, int n) ;
+void GM_SelectChannel(GM_Channel channel);
 
 
 

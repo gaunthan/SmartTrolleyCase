@@ -17,10 +17,12 @@ main.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdarg.
 main.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/GPS/GPS.h
 main.obj: E:/Workspace/TI/SmartTrolleyCase/general.h
 main.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h
+main.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h
 main.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/string.h
 main.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/GPRS/GPRS.h
 main.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h
 main.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/string.h
+main.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/GM8125/GM8125.h
 
 ../main.c: 
 D:/Program\ Files/TI/ccsv6/ccs_base/msp430/include/msp430.h: 
@@ -39,7 +41,9 @@ D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdarg.h:
 E:/Workspace/TI/SmartTrolleyCase/Drivers/GPS/GPS.h: 
 E:/Workspace/TI/SmartTrolleyCase/general.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h: 
+D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/string.h: 
 E:/Workspace/TI/SmartTrolleyCase/Drivers/GPRS/GPRS.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/string.h: 
+E:/Workspace/TI/SmartTrolleyCase/Drivers/GM8125/GM8125.h: 

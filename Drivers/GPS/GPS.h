@@ -32,7 +32,7 @@
 /**
  * GPS模块调试开关宏。1代表开启调试信息，0代表不开启。
  */
-#define GPS_DEBUG_ON 1
+#define GPS_DEBUG_ON 0
 
 
 /**
@@ -81,7 +81,7 @@ typedef struct {
  * @param	None
  * @return	None
  */
-void GPS_Init(void);
+void GPS_InitPort(void);
 
 
 /**
@@ -96,6 +96,16 @@ Status GPS_GetPosition(NMEA_msg *msg);
  * @return	None
  */
 void GPS_ShowPosition(NMEA_msg *msg);
+
+
+/**
+ * @brief	获取经纬度并按格式XX,XX放置到输出缓冲区buf中
+ * @param	buf 输出缓冲区
+ * 			bufSize 缓冲区大小
+ * @return	OK 操作成功
+ * 			ERROR 操作失败
+ */
+Status GPS_PutLocation(char *buf, int bufSize);
 
 
 /**************************************************************

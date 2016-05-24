@@ -8,6 +8,7 @@ CG_TOOL_ROOT := D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3
 
 ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
+"./general.obj" \
 "./main.obj" \
 "./MSP-EXP430F5529_HAL/HAL_AppUart.obj" \
 "./MSP-EXP430F5529_HAL/HAL_Board.obj" \
@@ -24,6 +25,7 @@ $(GEN_CMDS__FLAG) \
 "./F5xx_F6xx_Core_Lib/HAL_UCS.obj" \
 "./Drivers/GPS/GPS.obj" \
 "./Drivers/GPRS/GPRS.obj" \
+"./Drivers/GM8125/GM8125.obj" \
 "../lnk_msp430f5529.cmd" \
 -l"libc.a" \
 -l"libmath.a" \
@@ -40,11 +42,13 @@ RMDIR := RMDIR /S/Q
 -include F5xx_F6xx_Core_Lib/subdir_vars.mk
 -include Drivers/GPS/subdir_vars.mk
 -include Drivers/GPRS/subdir_vars.mk
+-include Drivers/GM8125/subdir_vars.mk
 -include subdir_rules.mk
 -include MSP-EXP430F5529_HAL/subdir_rules.mk
 -include F5xx_F6xx_Core_Lib/subdir_rules.mk
 -include Drivers/GPS/subdir_rules.mk
 -include Drivers/GPRS/subdir_rules.mk
+-include Drivers/GM8125/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -164,8 +168,8 @@ SmartTrolleyCase.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "main.pp" "MSP-EXP430F5529_HAL\HAL_AppUart.pp" "MSP-EXP430F5529_HAL\HAL_Board.pp" "MSP-EXP430F5529_HAL\HAL_Buttons.pp" "MSP-EXP430F5529_HAL\HAL_Cma3000.pp" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.pp" "MSP-EXP430F5529_HAL\HAL_Menu.pp" "MSP-EXP430F5529_HAL\HAL_SDCard.pp" "MSP-EXP430F5529_HAL\HAL_Wheel.pp" "F5xx_F6xx_Core_Lib\HAL_FLASH.pp" "F5xx_F6xx_Core_Lib\HAL_PMAP.pp" "F5xx_F6xx_Core_Lib\HAL_PMM.pp" "F5xx_F6xx_Core_Lib\HAL_TLV.pp" "F5xx_F6xx_Core_Lib\HAL_UCS.pp" "Drivers\GPS\GPS.pp" "Drivers\GPRS\GPRS.pp" 
-	-$(RM) "main.obj" "MSP-EXP430F5529_HAL\HAL_AppUart.obj" "MSP-EXP430F5529_HAL\HAL_Board.obj" "MSP-EXP430F5529_HAL\HAL_Buttons.obj" "MSP-EXP430F5529_HAL\HAL_Cma3000.obj" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.obj" "MSP-EXP430F5529_HAL\HAL_Menu.obj" "MSP-EXP430F5529_HAL\HAL_SDCard.obj" "MSP-EXP430F5529_HAL\HAL_Wheel.obj" "F5xx_F6xx_Core_Lib\HAL_FLASH.obj" "F5xx_F6xx_Core_Lib\HAL_PMAP.obj" "F5xx_F6xx_Core_Lib\HAL_PMM.obj" "F5xx_F6xx_Core_Lib\HAL_TLV.obj" "F5xx_F6xx_Core_Lib\HAL_UCS.obj" "Drivers\GPS\GPS.obj" "Drivers\GPRS\GPRS.obj" 
+	-$(RM) "general.pp" "main.pp" "MSP-EXP430F5529_HAL\HAL_AppUart.pp" "MSP-EXP430F5529_HAL\HAL_Board.pp" "MSP-EXP430F5529_HAL\HAL_Buttons.pp" "MSP-EXP430F5529_HAL\HAL_Cma3000.pp" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.pp" "MSP-EXP430F5529_HAL\HAL_Menu.pp" "MSP-EXP430F5529_HAL\HAL_SDCard.pp" "MSP-EXP430F5529_HAL\HAL_Wheel.pp" "F5xx_F6xx_Core_Lib\HAL_FLASH.pp" "F5xx_F6xx_Core_Lib\HAL_PMAP.pp" "F5xx_F6xx_Core_Lib\HAL_PMM.pp" "F5xx_F6xx_Core_Lib\HAL_TLV.pp" "F5xx_F6xx_Core_Lib\HAL_UCS.pp" "Drivers\GPS\GPS.pp" "Drivers\GPRS\GPRS.pp" "Drivers\GM8125\GM8125.pp" 
+	-$(RM) "general.obj" "main.obj" "MSP-EXP430F5529_HAL\HAL_AppUart.obj" "MSP-EXP430F5529_HAL\HAL_Board.obj" "MSP-EXP430F5529_HAL\HAL_Buttons.obj" "MSP-EXP430F5529_HAL\HAL_Cma3000.obj" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.obj" "MSP-EXP430F5529_HAL\HAL_Menu.obj" "MSP-EXP430F5529_HAL\HAL_SDCard.obj" "MSP-EXP430F5529_HAL\HAL_Wheel.obj" "F5xx_F6xx_Core_Lib\HAL_FLASH.obj" "F5xx_F6xx_Core_Lib\HAL_PMAP.obj" "F5xx_F6xx_Core_Lib\HAL_PMM.obj" "F5xx_F6xx_Core_Lib\HAL_TLV.obj" "F5xx_F6xx_Core_Lib\HAL_UCS.obj" "Drivers\GPS\GPS.obj" "Drivers\GPRS\GPRS.obj" "Drivers\GM8125\GM8125.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
