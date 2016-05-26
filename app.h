@@ -1,27 +1,27 @@
 /***************************************************************************************
-*        File Name              :	GM8125.h
+*        File Name              :	app.h
 *        CopyRight              :	gaunthan
-*        ModuleName             :	UART MUX
+*        ModuleName             :	applications
 *
 *        CPU                    :   MSP430
 *        RTOS                   :   None
 *
-*        Create Data            :	2016/5/19
+*        Create Data            :	2016/5/25
 *        Author/Corportation    :	gaunthan
 *
-*        Abstract Description   :	封装GM8125模块单通道模式下的控制操作，提供选择串口子通道函数。
+*        Abstract Description   :	high level applications
 *
 *--------------------------------Revision History--------------------------------------
 *       No      version     Date        Revised By      Item        Description
-*       1       v1.0        2016/5/19	gaunthan        		 	Create this file
+*       1       v1.0        2016/5/25	gaunthan        		 	Create this file
 *
 ***************************************************************************************/
 
 /**************************************************************
 *        Multi-Include-Prevent Section
 **************************************************************/
-#ifndef GM8125_H
-#define GM8125_H
+#ifndef APP_H
+#define APP_H
 
 /**************************************************************
 *        Debug switch Section
@@ -29,47 +29,61 @@
 /**
  * 模块调试开关宏。1代表开启调试信息，0代表不开启。
  */
-#define GM8125_DEBUG_ON 0
+#define APP_DEBUG_ON 0
 
 
 /**************************************************************
 *        Include File Section
 **************************************************************/
+#include <msp430.h>
+#include "HAL_Board.h"
+#include "HAL_PMM.h"
+#include "HAL_UCS.h"
 #include "HAL_AppUart.h"
+#include "HAL_Board.h"
 #include "general.h"
-#include "msp430f5529.h"
+#include "GPS.h"
+#include "GPRS.h"
+#include "GM8125.h"
+#include "Bluetooth.h"
+#include <stdio.h>
+
 
 /**************************************************************
 *        Macro Define Section
 **************************************************************/
-
-/* 定义输入通道地址引脚 */
-#define STADD2 0
-#define STADD1 BIT1
-#define STADD0 BIT0
-
-/* 定义输出通道地址引脚 */
-#define SRADD2 0
-#define SRADD1 BIT4
-#define SRADD0 BIT3
-
+/**
+ * @brief	设置模块所属子串口（通道）
+ */
+#define GPR_CHANNEL GM8125_CHANNEL1
+#define GPRS_CHANNEL GM8125_CHANNEL2
+#define BLUETOOTH_CHANNEL GM8125_CHANNEL3
 
 
 /**************************************************************
 *        Struct Define Section
 **************************************************************/
+/**
+ * @brief	定义 APP可以使用的请求信号
+ */
+typedef enum {
+	 SYS_START = 0x01,		/* 启动本系统工作 */
+	 KEEP_ALIVE = 0x02,		/* 保持连接活性 */
+	 GET_WEIGHT = 0x04,		/* 请求获取系统重量信息 */
+	 LOCK_DEVICE = 0x08,	/* 请求上锁设备 */
+	 UNLOCK_DEVICE = 0x10,	/* 请求解锁设备 */
+
+}Request;
 
 
 /**
- * @brief	定义子通道标识符。
+ * @brief	定义 发送给APP的相应信号
  */
 typedef enum {
-	GM8125_CHANNEL1,
-	GM8125_CHANNEL2,
-	GM8125_CHANNEL3,
-	GM8125_CHANNEL4,
-	GM8125_CHANNEL5,
-}GM8125_Channel;
+	SYNC = 0x01,	/* 收到SYS_START或KEEP_ALIVE请求 */
+	ACK = 0x02,		/* 收到GET_WEIGHT、LOCK_DEVICE或UNLOCK_DEVICE请求 */
+
+}Response;
 
 
 /**************************************************************
@@ -77,21 +91,43 @@ typedef enum {
 **************************************************************/
 
 /**
- * @brief	初始化GM8125模块硬件连接
+ * @brief	配置开发板，使其处于正常工作模式
  * @param	None
  * @return	None
  */
-void GM8125_InitPort(void);
+void SystemInit(void);
 
 
 /**
- * @brief	选择与母通道通信的子通道
- * @param	channel 通道值，可选为1~5
+ * @brief	初始化系统子模块硬件环境
+ * @param	None
  * @return	None
  */
-void GM8125_SelectChannel(GM8125_Channel channel);
+void ModulesInit(void);
 
 
+/**
+ * @brief	向远程服务器上报地理位置信息
+ * @param	None
+ * @return	None
+ */
+void ReportLocation(void);
+
+
+/**
+ * @brief	从应用端接收一个请求
+ * @param	None
+ * @return	请求码
+ */
+Request GetRequest(void);
+
+
+/**
+ * @brief	向应用端发送一个响应
+ * @param	res 响应码
+ * @return	None
+ */
+void SendResponse(Response res);
 
 /**************************************************************
 *        End-Multi-Include-Prevent Section

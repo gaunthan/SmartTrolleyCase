@@ -1,27 +1,27 @@
 /***************************************************************************************
-*        File Name              :	GM8125.h
+*        File Name              :	Bluetooth.h
 *        CopyRight              :	gaunthan
-*        ModuleName             :	UART MUX
+*        ModuleName             :	Bluetooth
 *
 *        CPU                    :   MSP430
 *        RTOS                   :   None
 *
-*        Create Data            :	2016/5/19
+*        Create Data            :	2016/5/25
 *        Author/Corportation    :	gaunthan
 *
-*        Abstract Description   :	封装GM8125模块单通道模式下的控制操作，提供选择串口子通道函数。
+*        Abstract Description   :	封装Bluetooth数据收发功能
 *
 *--------------------------------Revision History--------------------------------------
 *       No      version     Date        Revised By      Item        Description
-*       1       v1.0        2016/5/19	gaunthan        		 	Create this file
+*       1       v1.0        2016/5/25	gaunthan        		 	Create this file
 *
 ***************************************************************************************/
 
 /**************************************************************
 *        Multi-Include-Prevent Section
 **************************************************************/
-#ifndef GM8125_H
-#define GM8125_H
+#ifndef BLUETOOTH_H
+#define BLUETOOTH_H
 
 /**************************************************************
 *        Debug switch Section
@@ -29,7 +29,7 @@
 /**
  * 模块调试开关宏。1代表开启调试信息，0代表不开启。
  */
-#define GM8125_DEBUG_ON 0
+#define BT_DEBUG_ON 0
 
 
 /**************************************************************
@@ -37,22 +37,10 @@
 **************************************************************/
 #include "HAL_AppUart.h"
 #include "general.h"
-#include "msp430f5529.h"
 
 /**************************************************************
 *        Macro Define Section
 **************************************************************/
-
-/* 定义输入通道地址引脚 */
-#define STADD2 0
-#define STADD1 BIT1
-#define STADD0 BIT0
-
-/* 定义输出通道地址引脚 */
-#define SRADD2 0
-#define SRADD1 BIT4
-#define SRADD0 BIT3
-
 
 
 /**************************************************************
@@ -60,38 +48,49 @@
 **************************************************************/
 
 
-/**
- * @brief	定义子通道标识符。
- */
-typedef enum {
-	GM8125_CHANNEL1,
-	GM8125_CHANNEL2,
-	GM8125_CHANNEL3,
-	GM8125_CHANNEL4,
-	GM8125_CHANNEL5,
-}GM8125_Channel;
-
-
 /**************************************************************
 *        Prototype Declare Section
 **************************************************************/
 
 /**
- * @brief	初始化GM8125模块硬件连接
+ * @brief	初始化蓝牙模块与相关引脚。
  * @param	None
  * @return	None
  */
-void GM8125_InitPort(void);
+void BT_InitPort(void);
 
 
 /**
- * @brief	选择与母通道通信的子通道
- * @param	channel 通道值，可选为1~5
+ * @brief	向蓝牙模块发送一个字符
+ * @param	ch 需要发送的字符
  * @return	None
  */
-void GM8125_SelectChannel(GM8125_Channel channel);
+void BT_Putchar(char ch);
 
 
+/**
+ * @brief	从蓝牙模块读取一个字符
+ * @param	None
+ * @return	一个字符
+ */
+char BT_Getchar(void);
+
+
+/**
+ * @brief	向蓝牙模块发送一个字符串，末尾追发<CR><LF>
+ * @param	str 需要发送的字符串
+ * @return	None
+ */
+void BT_Println(const char *str);
+
+
+/**
+ * @brief	从蓝牙模块获取一个字符串，以<CR><LF>标志输入字符串的结束。若输入字符串过长将被截断。
+ * @param	buf 输出缓冲区
+ *			n 缓冲区大小
+ * @return	None
+ */
+void BT_Gets(char *buf, int n);
 
 /**************************************************************
 *        End-Multi-Include-Prevent Section

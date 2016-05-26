@@ -40,7 +40,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.SILICON_VERSION.1047760480" name="Silicon version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.SILICON_VERSION" value="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.SILICON_VERSION.mspx" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.PRINTF_SUPPORT.1360796053" name="Level of printf/scanf support required (--printf_support)" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.PRINTF_SUPPORT" value="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.PRINTF_SUPPORT.minimal" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.DEBUGGING_MODEL.1156958219" name="Debugging model" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.DEBUGGING_MODEL" value="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.DEBUGGING_MODEL.SYMDEBUG__DWARF" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.ADVICE__POWER.851173949" name="Enable checking of ULP power rules (--advice:power)" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.ADVICE__POWER" value="all" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.ADVICE__POWER.851173949" name="Enable checking of ULP power rules (--advice:power)" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.ADVICE__POWER" value="&quot;all&quot;" valueType="string"/>
 								<option id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.DIAG_WARNING.1985106965" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.DIAG_WARNING" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
 								</option>
@@ -55,6 +55,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Drivers/GPS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Drivers/GPRS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Drivers/GM8125}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Drivers/Bluetooth}&quot;"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.ABI.1832870641" name="Application binary interface [See 'General' page to edit] (--abi)" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compilerID.ABI.eabi" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compiler.inputType__C_SRCS.735885362" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP430_4.3.compiler.inputType__C_SRCS"/>

@@ -19,24 +19,13 @@ static char GPS_Buf[GPS_BUFF_SIZE + 1] = {0};
 
 
 /**
- * @brief	从GPS模块读取一个无符号字符
+ * @brief	从GPS模块读取一个字符
  * @param	None
- * @return	一个无符号字符
+ * @return	一个字符
  */
-static inline unsigned char GPS_GetByte(void)
+static inline char GPS_Getchar(void)
 {
 	return AppUart_getChar();
-}
-
-
-/**
- * @brief	向GPS模块发送一个无符号字符
- * @param	b 需要发送的字符
- * @return	None
- */
-static inline void GPS_SendByte(unsigned char b)
-{
-	AppUart_putChar(b);
 }
 
 
@@ -70,7 +59,7 @@ static Status GPS_GetData(char *buf, int size)
 	}
 
 	for(i = 0; i < size; ++i) {
-		buf[i] = GPS_GetByte();
+		buf[i] = GPS_Getchar();
 	}
 	return OK;
 }

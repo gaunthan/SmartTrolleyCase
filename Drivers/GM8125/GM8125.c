@@ -5,9 +5,9 @@
  */
 #if GPRS_DEBUG_ON
 	#include <stdio.h>
-	#define GM_DEBUG(fmt, args...) printf (fmt ,##args)
+	#define GM8125_DEBUG(fmt, args...) printf (fmt ,##args)
 #else
-	#define GM_DEBUG(fmt, args...)
+	#define GM8125_DEBUG(fmt, args...)
 #endif
 
 
@@ -15,7 +15,7 @@
 /**
  * @brief	设置引脚输出值
  */
-#define GM_SetPin(pin, value)					\
+#define GM8125_SetPin(pin, value)					\
 	do {										\
 		if(value)								\
 			P2OUT |= pin;						\
@@ -31,7 +31,7 @@
  * @param	None
  * @return	None
  */
-void GM_InitPort(void)
+void GM8125_InitPort(void)
 {
 	P2DIR |= STADD0 | STADD1 | STADD2 | SRADD0 | SRADD1 | SRADD2;
 }
@@ -43,65 +43,65 @@ void GM_InitPort(void)
  * @param	channel 通道值，可选为1~5
  * @return	None
  */
-void GM_SelectChannel(GM_Channel channel)
+void GM8125_SelectChannel(GM8125_Channel channel)
 {
 	switch(channel) {
-		case GM_CHANNEL1:	/* 通道2的地址值为001 */
-			GM_SetPin(STADD0, 1);
-			GM_SetPin(STADD1, 0);
-			GM_SetPin(STADD2, 0);
+		case GM8125_CHANNEL1:	/* 通道2的地址值为001 */
+			GM8125_SetPin(STADD0, 1);
+			GM8125_SetPin(STADD1, 0);
+			GM8125_SetPin(STADD2, 0);
 
-			GM_SetPin(SRADD0, 1);
-			GM_SetPin(SRADD1, 0);
-			GM_SetPin(SRADD2, 0);
+			GM8125_SetPin(SRADD0, 1);
+			GM8125_SetPin(SRADD1, 0);
+			GM8125_SetPin(SRADD2, 0);
 			break;
 
-		case GM_CHANNEL2:	/* 通道2的地址值为010 */
+		case GM8125_CHANNEL2:	/* 通道2的地址值为010 */
 
-			GM_SetPin(STADD0, 0);
-			GM_SetPin(STADD1, 1);
-			GM_SetPin(STADD2, 0);
+			GM8125_SetPin(STADD0, 0);
+			GM8125_SetPin(STADD1, 1);
+			GM8125_SetPin(STADD2, 0);
 
-			GM_SetPin(SRADD0, 0);
-			GM_SetPin(SRADD1, 1);
-			GM_SetPin(SRADD2, 0);
+			GM8125_SetPin(SRADD0, 0);
+			GM8125_SetPin(SRADD1, 1);
+			GM8125_SetPin(SRADD2, 0);
 			break;
 
-		case GM_CHANNEL3:	/* 通道3的地址值为011 */
+		case GM8125_CHANNEL3:	/* 通道3的地址值为011 */
 
-			GM_SetPin(STADD0, 1);
-			GM_SetPin(STADD1, 1);
-			GM_SetPin(STADD2, 0);
+			GM8125_SetPin(STADD0, 1);
+			GM8125_SetPin(STADD1, 1);
+			GM8125_SetPin(STADD2, 0);
 
-			GM_SetPin(SRADD0, 1);
-			GM_SetPin(SRADD1, 1);
-			GM_SetPin(SRADD2, 0);
+			GM8125_SetPin(SRADD0, 1);
+			GM8125_SetPin(SRADD1, 1);
+			GM8125_SetPin(SRADD2, 0);
 			break;
 
-		case GM_CHANNEL4:	/* 通道4的地址值为100 */
+		case GM8125_CHANNEL4:	/* 通道4的地址值为100 */
 
-			GM_SetPin(STADD0, 0);
-			GM_SetPin(STADD1, 0);
-			GM_SetPin(STADD2, 1);
+			GM8125_SetPin(STADD0, 0);
+			GM8125_SetPin(STADD1, 0);
+			GM8125_SetPin(STADD2, 1);
 
-			GM_SetPin(SRADD0, 0);
-			GM_SetPin(SRADD1, 0);
-			GM_SetPin(SRADD2, 1);
+			GM8125_SetPin(SRADD0, 0);
+			GM8125_SetPin(SRADD1, 0);
+			GM8125_SetPin(SRADD2, 1);
 			break;
 
-		case GM_CHANNEL5:	/* 通道1的地址值为101 */
+		case GM8125_CHANNEL5:	/* 通道1的地址值为101 */
 
-			GM_SetPin(STADD0, 1);
-			GM_SetPin(STADD1, 0);
-			GM_SetPin(STADD2, 1);
+			GM8125_SetPin(STADD0, 1);
+			GM8125_SetPin(STADD1, 0);
+			GM8125_SetPin(STADD2, 1);
 
-			GM_SetPin(SRADD0, 1);
-			GM_SetPin(SRADD1, 0);
-			GM_SetPin(SRADD2, 1);
+			GM8125_SetPin(SRADD0, 1);
+			GM8125_SetPin(SRADD1, 0);
+			GM8125_SetPin(SRADD2, 1);
 			break;
 
 		default:
-			GM_DEBUG("ERROR: Channel not support!\r\n");
+			GM8125_DEBUG("ERROR: Channel not support!\r\n");
 	}
 
 }

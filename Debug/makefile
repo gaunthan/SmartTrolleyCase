@@ -8,6 +8,7 @@ CG_TOOL_ROOT := D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3
 
 ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
+"./app.obj" \
 "./general.obj" \
 "./main.obj" \
 "./MSP-EXP430F5529_HAL/HAL_AppUart.obj" \
@@ -26,6 +27,7 @@ $(GEN_CMDS__FLAG) \
 "./Drivers/GPS/GPS.obj" \
 "./Drivers/GPRS/GPRS.obj" \
 "./Drivers/GM8125/GM8125.obj" \
+"./Drivers/Bluetooth/Bluetooth.obj" \
 "../lnk_msp430f5529.cmd" \
 -l"libc.a" \
 -l"libmath.a" \
@@ -43,12 +45,14 @@ RMDIR := RMDIR /S/Q
 -include Drivers/GPS/subdir_vars.mk
 -include Drivers/GPRS/subdir_vars.mk
 -include Drivers/GM8125/subdir_vars.mk
+-include Drivers/Bluetooth/subdir_vars.mk
 -include subdir_rules.mk
 -include MSP-EXP430F5529_HAL/subdir_rules.mk
 -include F5xx_F6xx_Core_Lib/subdir_rules.mk
 -include Drivers/GPS/subdir_rules.mk
 -include Drivers/GPRS/subdir_rules.mk
 -include Drivers/GM8125/subdir_rules.mk
+-include Drivers/Bluetooth/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -155,7 +159,7 @@ all: SmartTrolleyCase.out
 SmartTrolleyCase.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MSP430 Linker'
-	"D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3/bin/cl430" -vmspx --abi=eabi --data_model=restricted --advice:power=all -g --define=__MSP430F5529__ --diag_warning=225 --display_error_number --diag_wrap=off --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --printf_support=minimal -z -m"SmartTrolleyCase.map" --heap_size=160 --stack_size=160 --use_hw_mpy=F5 --cinit_hold_wdt=on -i"D:/Program Files/TI/ccsv6/ccs_base/msp430/include" -i"D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3/lib" -i"D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include" -i"D:/Program Files/TI/ccsv6/ccs_base/msp430/lib/5xx_6xx_FRxx" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="SmartTrolleyCase_linkInfo.xml" --rom_model -o "SmartTrolleyCase.out" $(ORDERED_OBJS)
+	"D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3/bin/cl430" -vmspx --abi=eabi --data_model=restricted --advice:power="all" -g --define=__MSP430F5529__ --diag_warning=225 --display_error_number --diag_wrap=off --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --printf_support=minimal -z -m"SmartTrolleyCase.map" --heap_size=160 --stack_size=160 --use_hw_mpy=F5 --cinit_hold_wdt=on -i"D:/Program Files/TI/ccsv6/ccs_base/msp430/include" -i"D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3/lib" -i"D:/Program Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include" -i"D:/Program Files/TI/ccsv6/ccs_base/msp430/lib/5xx_6xx_FRxx" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="SmartTrolleyCase_linkInfo.xml" --rom_model -o "SmartTrolleyCase.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -168,8 +172,8 @@ SmartTrolleyCase.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "general.pp" "main.pp" "MSP-EXP430F5529_HAL\HAL_AppUart.pp" "MSP-EXP430F5529_HAL\HAL_Board.pp" "MSP-EXP430F5529_HAL\HAL_Buttons.pp" "MSP-EXP430F5529_HAL\HAL_Cma3000.pp" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.pp" "MSP-EXP430F5529_HAL\HAL_Menu.pp" "MSP-EXP430F5529_HAL\HAL_SDCard.pp" "MSP-EXP430F5529_HAL\HAL_Wheel.pp" "F5xx_F6xx_Core_Lib\HAL_FLASH.pp" "F5xx_F6xx_Core_Lib\HAL_PMAP.pp" "F5xx_F6xx_Core_Lib\HAL_PMM.pp" "F5xx_F6xx_Core_Lib\HAL_TLV.pp" "F5xx_F6xx_Core_Lib\HAL_UCS.pp" "Drivers\GPS\GPS.pp" "Drivers\GPRS\GPRS.pp" "Drivers\GM8125\GM8125.pp" 
-	-$(RM) "general.obj" "main.obj" "MSP-EXP430F5529_HAL\HAL_AppUart.obj" "MSP-EXP430F5529_HAL\HAL_Board.obj" "MSP-EXP430F5529_HAL\HAL_Buttons.obj" "MSP-EXP430F5529_HAL\HAL_Cma3000.obj" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.obj" "MSP-EXP430F5529_HAL\HAL_Menu.obj" "MSP-EXP430F5529_HAL\HAL_SDCard.obj" "MSP-EXP430F5529_HAL\HAL_Wheel.obj" "F5xx_F6xx_Core_Lib\HAL_FLASH.obj" "F5xx_F6xx_Core_Lib\HAL_PMAP.obj" "F5xx_F6xx_Core_Lib\HAL_PMM.obj" "F5xx_F6xx_Core_Lib\HAL_TLV.obj" "F5xx_F6xx_Core_Lib\HAL_UCS.obj" "Drivers\GPS\GPS.obj" "Drivers\GPRS\GPRS.obj" "Drivers\GM8125\GM8125.obj" 
+	-$(RM) "app.pp" "general.pp" "main.pp" "MSP-EXP430F5529_HAL\HAL_AppUart.pp" "MSP-EXP430F5529_HAL\HAL_Board.pp" "MSP-EXP430F5529_HAL\HAL_Buttons.pp" "MSP-EXP430F5529_HAL\HAL_Cma3000.pp" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.pp" "MSP-EXP430F5529_HAL\HAL_Menu.pp" "MSP-EXP430F5529_HAL\HAL_SDCard.pp" "MSP-EXP430F5529_HAL\HAL_Wheel.pp" "F5xx_F6xx_Core_Lib\HAL_FLASH.pp" "F5xx_F6xx_Core_Lib\HAL_PMAP.pp" "F5xx_F6xx_Core_Lib\HAL_PMM.pp" "F5xx_F6xx_Core_Lib\HAL_TLV.pp" "F5xx_F6xx_Core_Lib\HAL_UCS.pp" "Drivers\GPS\GPS.pp" "Drivers\GPRS\GPRS.pp" "Drivers\GM8125\GM8125.pp" "Drivers\Bluetooth\Bluetooth.pp" 
+	-$(RM) "app.obj" "general.obj" "main.obj" "MSP-EXP430F5529_HAL\HAL_AppUart.obj" "MSP-EXP430F5529_HAL\HAL_Board.obj" "MSP-EXP430F5529_HAL\HAL_Buttons.obj" "MSP-EXP430F5529_HAL\HAL_Cma3000.obj" "MSP-EXP430F5529_HAL\HAL_Dogs102x6.obj" "MSP-EXP430F5529_HAL\HAL_Menu.obj" "MSP-EXP430F5529_HAL\HAL_SDCard.obj" "MSP-EXP430F5529_HAL\HAL_Wheel.obj" "F5xx_F6xx_Core_Lib\HAL_FLASH.obj" "F5xx_F6xx_Core_Lib\HAL_PMAP.obj" "F5xx_F6xx_Core_Lib\HAL_PMM.obj" "F5xx_F6xx_Core_Lib\HAL_TLV.obj" "F5xx_F6xx_Core_Lib\HAL_UCS.obj" "Drivers\GPS\GPS.obj" "Drivers\GPRS\GPRS.obj" "Drivers\GM8125\GM8125.obj" "Drivers\Bluetooth\Bluetooth.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

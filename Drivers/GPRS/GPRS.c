@@ -11,6 +11,18 @@
 #endif
 
 
+
+/**
+ * @brief	初始化GPS模块与相关引脚。
+ * @param	None
+ * @return	None
+ */
+void GPRS_InitPort(void)
+{
+	AppUart_init();		/* 初始化硬件通信接口 */
+}
+
+
 /**
  * @brief	从GPRS模块读取一个字符
  * @param	None
@@ -145,17 +157,6 @@ static Status GPRS_WaitCREG(void)
 	GPRS_DEBUG("Succeed in registing network.\r\n");
 
 	return OK;
-}
-
-
-/**
- * @brief	初始化GPS模块与相关引脚。
- * @param	None
- * @return	None
- */
-void GPRS_InitPort(void)
-{
-	AppUart_init();		/* 初始化硬件通信接口 */
 }
 
 
