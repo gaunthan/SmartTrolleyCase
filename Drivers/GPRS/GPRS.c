@@ -251,8 +251,8 @@ static Status GPRS_SendATData(char *data)
 Status GPRS_InitSMTP(void)
 {
 	char buf[128];
-	char username[32] = "=";
-	char userpasswd[32] = "=";
+	char username[32] = "";
+	char userpasswd[32] = "";
 
 	/* 建立TCP连接，服务器为smtp.163.com，端口为25 */
 	GPRS_SendATCmd("AT+CIPSTART=\"TCP\",\"smtp.163.com\",\"25\"");

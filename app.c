@@ -40,6 +40,7 @@ void ModulesInit(void)
 	GPS_InitPort();
 	GPRS_InitPort();
 	BT_InitPort();
+	HX711_GPIO_Init();
 }
 
 
@@ -102,8 +103,8 @@ Request GetRequest(void)
  * @param	res ÏìÓ¦Âë
  * @return	None
  */
-void SendResponse(Response res)
+void SendResponse(Request res)
 {
-	BT_Putchar((Response)res);
+	BT_Putchar((Request)res);
 }
 

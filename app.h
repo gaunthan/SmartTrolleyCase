@@ -48,6 +48,7 @@
 #include "Bluetooth.h"
 #include "lock.h"
 #include <stdio.h>
+#include "Scale.h"
 
 
 /**************************************************************
@@ -79,16 +80,6 @@ typedef enum {
 	 UNLOCK_DEVICE = 0x08,	/* 请求解锁设备 */
 
 }Request;
-
-
-/**
- * @brief	定义 发送给APP的相应信号
- */
-typedef enum {
-	SYNC = 0x01,	/* 收到SYS_START或KEEP_ALIVE请求 */
-	ACK = 0x02,		/* 收到GET_WEIGHT、LOCK_DEVICE或UNLOCK_DEVICE请求 */
-
-}Response;
 
 
 /**************************************************************
@@ -132,7 +123,7 @@ Request GetRequest(void);
  * @param	res 响应码
  * @return	None
  */
-void SendResponse(Response res);
+void SendResponse(Request res);
 
 /**************************************************************
 *        End-Multi-Include-Prevent Section

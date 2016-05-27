@@ -26,6 +26,10 @@ app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/Bluetooth/Bluetooth.h
 app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/Lock/lock.h
 app.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdio.h
 app.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdarg.h
+app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/Scaler/Scale.h
+app.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdio.h
+app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/Scaler/Caculate.h
+app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/Scaler/HX711.h
 
 ../app.c: 
 ../app.h: 
@@ -53,3 +57,7 @@ E:/Workspace/TI/SmartTrolleyCase/Drivers/Bluetooth/Bluetooth.h:
 E:/Workspace/TI/SmartTrolleyCase/Drivers/Lock/lock.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdio.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdarg.h: 
+E:/Workspace/TI/SmartTrolleyCase/Drivers/Scaler/Scale.h: 
+D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdio.h: 
+E:/Workspace/TI/SmartTrolleyCase/Drivers/Scaler/Caculate.h: 
+E:/Workspace/TI/SmartTrolleyCase/Drivers/Scaler/HX711.h: 
