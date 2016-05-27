@@ -46,6 +46,7 @@
 #include "GPRS.h"
 #include "GM8125.h"
 #include "Bluetooth.h"
+#include "lock.h"
 #include <stdio.h>
 
 
@@ -60,6 +61,11 @@
 #define BLUETOOTH_CHANNEL GM8125_CHANNEL3
 
 
+/**
+ * @brief	选择串口通信通道
+ */
+#define SelectChannel(chan) GM8125_SelectChannel(chan)
+
 /**************************************************************
 *        Struct Define Section
 **************************************************************/
@@ -70,8 +76,7 @@ typedef enum {
 	 SYS_START = 0x01,		/* 启动本系统工作 */
 	 KEEP_ALIVE = 0x02,		/* 保持连接活性 */
 	 GET_WEIGHT = 0x04,		/* 请求获取系统重量信息 */
-	 LOCK_DEVICE = 0x08,	/* 请求上锁设备 */
-	 UNLOCK_DEVICE = 0x10,	/* 请求解锁设备 */
+	 UNLOCK_DEVICE = 0x08,	/* 请求解锁设备 */
 
 }Request;
 

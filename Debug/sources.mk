@@ -105,6 +105,7 @@ SUBDIRS := \
 . \
 MSP-EXP430F5529_HAL \
 F5xx_F6xx_Core_Lib \
+Drivers/Lock \
 Drivers/GPS \
 Drivers/GPRS \
 Drivers/GM8125 \

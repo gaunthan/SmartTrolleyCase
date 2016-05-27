@@ -23,6 +23,7 @@ app.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h
 app.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/string.h
 app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/GM8125/GM8125.h
 app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/Bluetooth/Bluetooth.h
+app.obj: E:/Workspace/TI/SmartTrolleyCase/Drivers/Lock/lock.h
 app.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdio.h
 app.obj: D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdarg.h
 
@@ -49,5 +50,6 @@ D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdlib.h:
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/string.h: 
 E:/Workspace/TI/SmartTrolleyCase/Drivers/GM8125/GM8125.h: 
 E:/Workspace/TI/SmartTrolleyCase/Drivers/Bluetooth/Bluetooth.h: 
+E:/Workspace/TI/SmartTrolleyCase/Drivers/Lock/lock.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdio.h: 
 D:/Program\ Files/TI/ccsv6/tools/compiler/msp430_4.3.3/include/stdarg.h: 
